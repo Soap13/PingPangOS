@@ -1,0 +1,202 @@
+
+
+==================================================================
+D:\Users\K-Bird\Desktop\nasm\OS2013-12-7\PingPangOS\elf\kl
+==================================================================
+
+
+
+------------ ELF Header ---------------
+e_ident              7Fh, "ELF", 1h, 1h, 1h, ...
+e_type                2    Executable file
+e_machine             3    80386
+e_version             1
+e_entry           50400 H    Entry point.
+e_phoff              34 H
+e_shoff            2080 H
+e_flags               0
+e_ehsize             34 H
+e_phentsize          20 H
+e_phnum               3
+e_shentsize          28 H
+e_shnum               B H
+e_shstrndx            8 H
+
+------------- Program Header 0 -------------
+
+p_type                1 H    PT_LOAD
+p_offset              0 H
+p_vaddr           50000 H
+p_paddr           50000 H
+p_filesz           1948 H
+p_memsz            1948 H
+p_flags               5 H
+p_align            1000 H
+
+------------- Program Header 1 -------------
+
+p_type                1 H    PT_LOAD
+p_offset           2000 H
+p_vaddr           52000 H
+p_paddr           52000 H
+p_filesz              C H
+p_memsz             D70 H
+p_flags               6 H
+p_align            1000 H
+
+------------- Program Header 2 -------------
+
+p_type         6474E551 H    PT_??PROC
+p_offset              0 H
+p_vaddr               0 H
+p_paddr               0 H
+p_filesz              0 H
+p_memsz               0 H
+p_flags               7 H
+p_align               4 H
+
+------------- Section Header 0 -------------
+
+sh_name               0 H    
+sh_type               0 H    SHT_NULL
+sh_flags              0 H    Unknown
+sh_addr               0 H    Position in Mem.
+sh_offset             0 H    Position in file.
+sh_size               0 H
+sh_link               0 H
+sh_info               0 H
+sh_addralign          0 H
+sh_entsize            0 H
+
+------------- Section Header 1 -------------
+
+sh_name              1B H    .text
+sh_type               1 H    SHT_PROGBITS
+sh_flags              6 H    SHF_ALLOC & SHF_EXECINSTR
+sh_addr           50400 H    Position in Mem.
+sh_offset           400 H    Position in file.
+sh_size             BE6 H
+sh_link               0 H
+sh_info               0 H
+sh_addralign         10 H
+sh_entsize            0 H
+
+------------- Section Header 2 -------------
+
+sh_name              21 H    .rodata
+sh_type               1 H    SHT_PROGBITS
+sh_flags              2 H    SHF_ALLOC
+sh_addr           51000 H    Position in Mem.
+sh_offset          1000 H    Position in file.
+sh_size             675 H
+sh_link               0 H
+sh_info               0 H
+sh_addralign         20 H
+sh_entsize            0 H
+
+------------- Section Header 3 -------------
+
+sh_name              34 H    data
+sh_type               1 H    SHT_PROGBITS
+sh_flags              2 H    SHF_ALLOC
+sh_addr           51675 H    Position in Mem.
+sh_offset          1675 H    Position in file.
+sh_size              B8 H
+sh_link               0 H
+sh_info               0 H
+sh_addralign          1 H
+sh_entsize            0 H
+
+------------- Section Header 4 -------------
+
+sh_name              29 H    .eh_frame
+sh_type               1 H    SHT_PROGBITS
+sh_flags              2 H    SHF_ALLOC
+sh_addr           51730 H    Position in Mem.
+sh_offset          1730 H    Position in file.
+sh_size             218 H
+sh_link               0 H
+sh_info               0 H
+sh_addralign          4 H
+sh_entsize            0 H
+
+------------- Section Header 5 -------------
+
+sh_name              33 H    .data
+sh_type               1 H    SHT_PROGBITS
+sh_flags              3 H    SHF_WRITE & SHF_ALLOC
+sh_addr           52000 H    Position in Mem.
+sh_offset          2000 H    Position in file.
+sh_size               C H
+sh_link               0 H
+sh_info               0 H
+sh_addralign          4 H
+sh_entsize            0 H
+
+------------- Section Header 6 -------------
+
+sh_name              39 H    .bss
+sh_type               8 H    SHT_NOBITS
+sh_flags              3 H    SHF_WRITE & SHF_ALLOC
+sh_addr           52020 H    Position in Mem.
+sh_offset          200C H    Position in file.
+sh_size             D50 H
+sh_link               0 H
+sh_info               0 H
+sh_addralign         20 H
+sh_entsize            0 H
+
+------------- Section Header 7 -------------
+
+sh_name              3E H    .comment
+sh_type               1 H    SHT_PROGBITS
+sh_flags             30 H    SHF_MASKPROC
+sh_addr               0 H    Position in Mem.
+sh_offset          200C H    Position in file.
+sh_size              2A H
+sh_link               0 H
+sh_info               0 H
+sh_addralign          1 H
+sh_entsize            1 H
+
+------------- Section Header 8 -------------
+
+sh_name              11 H    .shstrtab
+sh_type               3 H    SHT_STRTAB
+sh_flags              0 H    Unknown
+sh_addr               0 H    Position in Mem.
+sh_offset          2036 H    Position in file.
+sh_size              47 H
+sh_link               0 H
+sh_info               0 H
+sh_addralign          1 H
+sh_entsize            0 H
+
+------------- Section Header 9 -------------
+
+sh_name               1 H    .symtab
+sh_type               2 H    SHT_SYMTAB
+sh_flags              0 H    Unknown
+sh_addr               0 H    Position in Mem.
+sh_offset          2238 H    Position in file.
+sh_size             5E0 H
+sh_link               A H
+sh_info              26 H
+sh_addralign          4 H
+sh_entsize           10 H
+
+------------- Section Header 10 -------------
+
+sh_name               9 H    .strtab
+sh_type               3 H    SHT_STRTAB
+sh_flags              0 H    Unknown
+sh_addr               0 H    Position in Mem.
+sh_offset          2818 H    Position in file.
+sh_size             49C H
+sh_link               0 H
+sh_info               0 H
+sh_addralign          1 H
+sh_entsize            0 H
+
+---------------------------------------
+

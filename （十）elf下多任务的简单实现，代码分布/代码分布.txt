@@ -1,0 +1,30 @@
+|-include
+| |
+| |_interrupt.h      #中断的函数头文件
+| |
+| |-io.h             #输入输出函数的头文件
+| |
+| |-process_struct.h #进程处理的结构体文件  
+| |
+| |-process.h        #进程的头文件
+| |
+| |-gloable.h        #放一些全局的变量例如：选择子
+| |
+| |-unistd.h         #系统调用的函数对应的选择       
+|    
+|
+|-kernel
+| |
+| |-interrupt.c #中断处理的C文件
+| |
+| |-kernel.asm  #内核文件
+| |
+| |-process.c   #进程处理的文件
+|
+|-lib
+| |
+| |-klib.asm    #核心函数文件
+| |
+| |-printf.c    #输出扩展C文件
+|
+|-mbr.asm
