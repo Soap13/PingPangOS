@@ -657,6 +657,9 @@ sys_exit:
 align 4
 restart:
     ;cli
+	;push dword [current_proc]
+	;call put_hexln
+	
 	mov	esp,[current_proc] ;得到一个地址
 	
 	lldt [esp+18*4]

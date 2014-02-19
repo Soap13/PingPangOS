@@ -92,7 +92,7 @@
 	 test_show_a();
 	 int i=0,j=0;
 	 for(;i<10000;i++){
-	   for(;j<1000;j++){
+	   for(;j<10;j++){
 	   
 	   }
 	 }
@@ -109,7 +109,7 @@
 	 test_show_b();
 	  int i=0,j=0;
 	 for(;i<10000;i++){
-	   for(;j<100;j++){
+	   for(;j<10;j++){
 	   
 	   }
 	 }
@@ -180,18 +180,18 @@ void init_process(unsigned int addr){
 	
 	init_process((unsigned int)test_pro_b);
 	
-	init_process((unsigned int)test_pro_b);
+	//init_process((unsigned int)test_pro_b);
 	
-	init_process((unsigned int)test_pro_b);
+	//init_process((unsigned int)test_pro_b);
 	
-	init_process((unsigned int)test_pro_a);
+	//init_process((unsigned int)test_pro_a);
 	
 	if(proc_count>0){
 	
 	  put_hexln(proc_count);
 	  
-	  proc_table[1].statu=1;
-	  current_proc=&proc_table[1];
+	  proc_table[0].statu=1;
+	  current_proc=&proc_table[0];
 	  
 	  /*
 	  put_hexln((int)&proc_table[0]);
@@ -219,15 +219,13 @@ void init_process(unsigned int addr){
 	int i=0,current=0;
 	for(;i<proc_count;i++){
 	 if(proc_table[i].statu==1){
-	    current=i;
 		proc_table[i].statu=0;
 		break;
 	 }
 	}
-	   current=(current+1)%proc_count;
-	   
-	   put_hex(current);
-	   proc_table[current].statu=1;
+	   current=(i+1)%proc_count;
+	   put_int(0); 
+    	 proc_table[current].statu=1;
 	  //下一个进程
 	 current_proc=&proc_table[current];
 	

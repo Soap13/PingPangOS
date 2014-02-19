@@ -40,6 +40,8 @@ void put_int(int number){
     *p++ =leave;
 	count++;
   }
+  
+ 
     *p=0;  
  
   while(count/2>=length){
