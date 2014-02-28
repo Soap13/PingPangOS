@@ -8,6 +8,7 @@
  #include "process.h"
  #include "process_struct.h"
  #include "gloable.h"
+ #include "unistd.h"
  /**
   * 思路有两种
   * 1.书上这个是进行初始化很多东西人后切换的
@@ -86,14 +87,12 @@
  void test_pro_a(){
      //put_string("ok\r\n");
 	 
-	
+	sys_put_str("A");
 	 while(1){
-	 
-	 test_show_a();
-	 int i=0,j=0;
+	 int i=0,j=1;
 	 for(;i<10000;i++){
-	   for(;j<10;j++){
-	   
+	   for(;j<1000;j++){
+	    sys_put_intln(j);
 	   }
 	 }
 	}
@@ -103,13 +102,12 @@
   void test_pro_b(){
      //put_string("ok\r\n");
 	 
-	
+	sys_put_str("B");
 	 while(1){
 	 
-	 test_show_b();
 	  int i=0,j=0;
 	 for(;i<10000;i++){
-	   for(;j<10;j++){
+	   for(;j<1000;j++){
 	   
 	   }
 	 }
@@ -149,30 +147,6 @@ void init_process(unsigned int addr){
   * 实例化信息
   */
  void ini_process(){
-/*	 
-	//当面任务个数的控制 
-	 init_ldt();
-	 
-    //test_pro_a();
-	
-    PROCESS *proc=proc_table[proc_count-1]; 
-	
-	//memset_p((unsigned int)task_stack,(unsigned int)0,(unsigned int)TASK_STACK_LENGTH);
-	
-	//目前是ldt的0 和 1 权限3级别 
-	proc->registers.cs=0x07;
-	proc->registers.ds=0x0F;
-	proc->registers.es=0x0F;
-	proc->registers.fs=0x0F;
-	proc->registers.ss=0x0F;
-	proc->registers.gs=0x0023;
-	proc->registers.eip=(unsigned int)test_pro_a;
-    proc->registers.esp=(unsigned int)task_stack+TASK_STACK_LENGTH;//声明的数组
-    proc->registers.eflags=0x1202; // IF=1, IOPL=1, bit 2 is always 1.
-	
-	put_str("Init a proc over!\r\n");
-	*/
-	
 	
 	memset_p((unsigned int)proc_table,0,sizeof(PROCESS)*NR_TASKS);
 	
@@ -193,19 +167,6 @@ void init_process(unsigned int addr){
 	  proc_table[0].statu=1;
 	  current_proc=&proc_table[0];
 	  
-	  /*
-	  put_hexln((int)&proc_table[0]);
-	   put_hexln((int)&proc_table[1]);
-	    put_hexln((int)&proc_table[2]);
-		 put_hexln((int)&proc_table[3]);
-		  put_hexln((int)&proc_table[4]);
-		*/
-        put_hexln((int)task_stack[0]+TASK_STACK_LENGTH);	
-        put_hexln((int)task_stack[1]+TASK_STACK_LENGTH);
-        put_hexln((int)task_stack[2]+TASK_STACK_LENGTH);
-        put_hexln((int)task_stack[3]+TASK_STACK_LENGTH);
-        put_hexln((int)task_stack[4]+TASK_STACK_LENGTH); 
- 
 	  put_str("Init a proc over!\r\n");
 	  
 	}else{

@@ -10,6 +10,7 @@ void make_idt_description(unsigned int addr,unsigned int gdt_select,unsigned int
 void normal_interrupt(); //普通中断处理
 void clock_interrupt(); //时钟中断
 void key_interrupt();   //键盘中断
+void system_interrupt(); //系统中断
 void exit();            //系统终止
 //中断
 void interrupt_number_00();

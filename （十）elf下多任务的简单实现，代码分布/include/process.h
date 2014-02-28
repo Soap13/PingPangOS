@@ -12,5 +12,3 @@ void add_gdt();              //GDT会从新加载的
 void restart();              //模拟中断返回
 
 void exit();
-void test_show_a();
-void test_show_b();

@@ -26,5 +26,9 @@
 | |-klib.asm    #核心函数文件
 | |
 | |-printf.c    #输出扩展C文件
+| |
+| |-sys_call.asm #系统的函数
+| |
+| |-sys_printf.c #扩展的系统输出函数
 |
 |-mbr.asm

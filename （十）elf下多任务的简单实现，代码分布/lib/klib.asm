@@ -17,19 +17,26 @@ gdt_basic        equ 0x00007e00
 interrupt_basic  equ 0x0000A000    ;中断加载的位置
 ldt_basic        equ 0x00008200
 
+;--------------------------
+;函数地址
 extern normal_interrupt_process
 extern put_hexln
 extern change_proc
 
+
+;--------------------------
+;变量或者指针地址
 extern current_proc ;这个是进程表 因为这里开头放的是 堆栈信息
 extern tss       ;tss的信息
 extern StackTop  ;内核堆栈位置
+extern sys_call_table ;地址系统函数选择地址
 [bits 32]
 
 [section .text]
 global put_string       ;屏幕显示字符串0结尾，没有换行的
 global MemCpy           ;内存copy （目的地址 源地址 长度）
 global memset_p
+
 global make_gdt_description ;GDT的安装需要从新加载
 global make_ldt_description
 global make_idt_description ;中断异常门安装
@@ -37,6 +44,7 @@ global Init8259A        ;实例化芯片中断
 global clock_interrupt  ;时钟中断
 global key_interrupt    ;键盘中断
 global normal_interrupt ;普通中断
+global system_interrupt ;系统函数调用
 global exit             ;系统终止掉
 global test_show_a
 global test_show_b
@@ -594,65 +602,41 @@ key_interrupt:
 			  out 0x64,al
 			  
 			  popad
-              iret	
+              iret
 ;==========================================================
-test_show_a:
-           inc byte [gs:0]
-           ret	
-test_show_b:
-           inc byte [gs:1]
-           ret		   
+;系统函数调用处理
+;通过比较eax确定函数的调用
+;eax的值的大小 从这步起 eax，ebx，ecx,edx,esi,edi值不能改变
+;==========================================================			  
+system_interrupt:
+                 ;
+                 cli
+				 call save
+				 call [sys_call_table+eax*4]
+				 sti
+                 ret	
+;==========================================================
+;寄存器信息保存
+;因为是调用的所以有个如入栈了，这里只有系统函数使用才调用
+save:
+     pushad
+	 push ds
+	 push es
+	 push fs
+	 push gs
+     
+	 ;堆栈用内核的堆栈
+	 mov esi,esp
+	 mov esp,StackTop
+	 ;这里程序的基本用内核级别的了
+	
+	 ;放一个进程的入口地址
+	 push restart
+	 ;跳转回刚进来的位置
+     jmp [esi+12*4]	 
 ;==========================================================	
 exit:
-     hlt	 
-;==========================================================
-;系统函数调用
-;==========================================================
-;#0x80调用
-;中断保存的变量是3个
-;ebp + 地址
-sys_call_interrupt:
-                   push ebp
-                   mov ebp,esp
-				   add esp,4*5
-                   call [ebp+4*4]
-				   
-                  
-		           iret
-;==========================================================		 
-;有个是调用的eip地址
-;请求的函数地址
-;参数
-sys_call:
-         add esp,4
-         int 0x80
-		 sub esp,4
-         ret		
-;==========================================================		 
-;#0 有一个参数
-sys_put_string:
-                                            ;显示0终止的字符串并移动光标 
-                                            ;输入：DS:EBX=串地址
-         push ecx
-		 push ebx
-		 
-		 mov ebx,[esp+4*3]                ;保护参数两个，函数调用近的一个
-  .getc:
-         mov cl,[ebx]
-         or cl,cl
-         jz .exit
-         call put_char
-         inc ebx
-         jmp .getc
-
-  .exit:
-         pop ebx
-         pop ecx
-         ret                               ;段间返回
-;==========================================================
-;#1
-sys_exit:
-         hlt	 
+     hlt	  
 ;==========================================================	
 align 4
 restart:
@@ -664,7 +648,10 @@ restart:
 	
 	lldt [esp+18*4]
 	;hlt
-	mov	eax, [esp + 16*4]
+	;切记内核中3的esp使用大小只限于信息保存
+	;mov	eax, [esp + 16*4]
+	mov eax,esp
+	add eax,18*4
 	mov	dword [tss + 1*4], eax
 	
 	pop	gs
