@@ -1,0 +1,1 @@
+/** * 全局变量的声明 * 王征 2014-02-05 */   //信息的地址位置 #define GDT_BASIC            0x00007e00  #define INTERRUPT_BASIC      0x0000A000  #define LDT_BASIC            0x00008200   //选择子的描述信息   //放的是数据的数据位置信息 extern pgdt;  
